@@ -35,12 +35,22 @@ company-website/
 ├── services.html       # Services page
 ├── about.html          # About page
 ├── contact.html        # Contact page
+├── login.html          # User login page
+├── register.html       # User registration page
+├── admin.html          # Admin dashboard
 ├── css/
 │   └── style.css       # All styles
 ├── js/
-│   └── contact.js      # Contact form functionality
+│   ├── contact.js      # Contact form functionality
+│   ├── auth.js         # Authentication utilities
+│   └── admin.js        # Admin dashboard functionality
 ├── images/
 │   └── logo.svg        # Company logo
+├── backend/            # Backend API server
+│   ├── src/            # Source code
+│   ├── package.json    # Dependencies
+│   ├── createAdmin.js  # Admin user creation script
+│   └── README.md       # Backend documentation
 └── README.md           # This file
 ```
 
@@ -106,12 +116,66 @@ This setup currently only works on your local computer. To make it available onl
 - Configure firewall and port forwarding
 - Point your domain to your IP address
 
+## Backend & Database
+
+This website now includes a full backend system with user authentication and an admin dashboard!
+
+### Features
+
+- User registration and login with JWT authentication
+- Password hashing and security
+- Admin dashboard for user management
+- SQLite database for persistent data storage
+- Role-based access control
+
+### Setting Up the Backend
+
+1. **Install Node.js** (if not already installed):
+   - Download from https://nodejs.org/
+   - Version 14 or higher recommended
+
+2. **Navigate to the backend directory**:
+   ```bash
+   cd backend
+   ```
+
+3. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+4. **Create an admin user**:
+   ```bash
+   node createAdmin.js
+   ```
+   Follow the prompts to create your first admin account.
+
+5. **Start the backend server**:
+   ```bash
+   npm run dev
+   ```
+   The API server will run on http://localhost:3000
+
+6. **Start the frontend** (in a new terminal):
+   ```bash
+   ./start-server.sh
+   ```
+   The website will run on http://localhost:8000
+
+### Using the System
+
+- **Register**: Visit http://localhost:8000/register.html to create a new account
+- **Login**: Visit http://localhost:8000/login.html to login
+- **Admin Dashboard**: Login with an admin account to access http://localhost:8000/admin.html
+
+See `backend/README.md` for detailed API documentation and backend information.
+
 ## Contact Form
 
-The contact form currently shows an alert message. To make it functional, you'll need to:
+The contact form currently shows an alert message. To make it send real emails or save to database, you can:
 
-1. Set up a backend service (Node.js, PHP, etc.)
-2. Or use a form service like:
+1. Extend the existing backend with a contact form endpoint
+2. Use a form service like:
    - Formspree
    - EmailJS
    - Google Forms
